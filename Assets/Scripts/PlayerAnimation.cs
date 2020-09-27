@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator anim;
+    private Animator swordAnimation;
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-
+        swordAnimation = transform.GetChild(1).GetComponent<Animator>();
     }
 
     public void Move(float move)
@@ -24,5 +25,6 @@ public class PlayerAnimation : MonoBehaviour
     public void Attack()
     {
         anim.SetTrigger("Attack");
+        swordAnimation.SetTrigger("SwordAnimation");
     }
 }
