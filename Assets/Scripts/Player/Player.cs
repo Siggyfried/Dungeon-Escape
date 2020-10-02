@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rigid;
     [SerializeField]
@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
     private PlayerAnimation playerAnim;
     private SpriteRenderer playerSprite;
     private SpriteRenderer swordArcSprite;
-   
+
+    public int Health { get; set; }
   
     void Start()
     {
@@ -110,6 +111,9 @@ public class Player : MonoBehaviour
         resetJump = false;
     }
         
- 
+    public void Damage()
+    {
+        Debug.Log("Player Damaged");
+    }
 
 }
