@@ -14,12 +14,18 @@ public class Spider : Enemy, IDamageable
         Health = base.health;
     }
 
+    public override void Update()
+    {
+        
+    }
+
     public void Damage()
     {
         Health--;
         if (Health < 0)
         {
-            Destroy(this.gameObject);
+            isDead = true;
+            anim.SetTrigger("Death");
         }
     }
 
