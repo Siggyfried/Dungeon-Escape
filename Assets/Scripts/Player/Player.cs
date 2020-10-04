@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    public int diamonds;
+
     private Rigidbody2D rigid;
     [SerializeField]
     private float jumpForce = 5.0f;

@@ -21,11 +21,17 @@ public class Spider : Enemy, IDamageable
 
     public void Damage()
     {
+        if (isDead == true)
+            return;
+
+        Debug.Log("Spider:: Damage()");
         Health--;
         if (Health < 0)
         {
             isDead = true;
             anim.SetTrigger("Death");
+            GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;
+            diamond.GetComponent<Diamond>().gems = base.gems;
         }
     }
 
@@ -36,7 +42,7 @@ public class Spider : Enemy, IDamageable
 
     public void Attack()
     {
-        Instantiate(acidEffectPrefab, transform.position, quaternion.identity);
+        Instantiate(acidEffectPrefab, transform.position, Quaternion.identity);
     }
 
 
