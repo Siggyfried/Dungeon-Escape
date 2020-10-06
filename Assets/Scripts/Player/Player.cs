@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         CalculateMovement();
 
-        if (Input.GetMouseButtonDown(0) && isGrounded() == true)
+        if (CrossPlatformInputManager.GetButtonDown("A_Button") && isGrounded() == true)
         {
             playerAnim.Attack();
         }
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void CalculateMovement()
     {
-        float move = Input.GetAxisRaw("Horizontal");
+        float move = CrossPlatformInputManager.GetAxis("Horizontal");
         grounded = isGrounded();
 
         if (move > 0)
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour, IDamageable
             Flip(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded() == true)
+        if ((CrossPlatformInputManager.GetButtonDown("B_Button") || Input.GetKeyDown(KeyCode.Space)) && isGrounded() == true)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
             StartCoroutine(ResetJumpRoutine());
