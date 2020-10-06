@@ -27,6 +27,7 @@ public class Player : MonoBehaviour, IDamageable
         playerAnim = GetComponent<PlayerAnimation>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         swordArcSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        Health = 4;
     }
     void Update()
     {
@@ -115,7 +116,23 @@ public class Player : MonoBehaviour, IDamageable
         
     public void Damage()
     {
-        Debug.Log("Player Damaged");
-    }
+        if (Health < 1)
+        {
+            return;
+        }
 
+        Debug.Log("Player Damaged");
+        Health--;
+        UIManager.Instance.UpdateLives(Health);
+        if (Health < 1)
+        {
+            playerAnim.Death();
+        }
+    }
+    
+    public void AddGems(int amount)
+    {
+        diamonds += amount;
+        UIManager.Instance.UpdateGemCount(diamonds);
+    }
 }
